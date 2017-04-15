@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<title>Crystal Collector</title>
+<!-- Jquery link -->
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+
+	<!-- Latest compiled and minified CSS BootStrap-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+
+
+</head>
+
+
+<body >
+<div class="container" style="background-image:url('assets/images/background.png' );background-repeat: repeat; width: 100%; height:100vh; border-style: solid;" >
+
+
+	   <div class="row">
+	   			<div class="col-lg-6" style="background-color: red; color: white"><center><h1 class="h1"><b>Crystal Collector !</b></center</h1></div>
+	   			<div class="col-lg-6"></div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-lg-6" id="help" style="background-color: #155f5b; color: brown; height: 179px;""><h3 class"h3"></h3></div>
+			<div class="col-lg-6"></div>
+		</div>
+
+<!--		<div class="row"> -->
+			
+				<div class="row">
+						<div class="col-lg-2" id="tscore" style="background-color: red; color: white; height: 79px;" ><h3 class="h3">Target:</h3></div>
+						<div class="col-lg-2" id="yscore" style="background-color: blue; color: white; height: 79px;"><h3 class="h3">Score:</h3></div>
+						<div class="col-lg-2" id="wl" style="padding: 1px;" >
+							<div class="col-lg-12" id="wins" style="background-color: teal; color: white"><h4 class="h4">Wins:</h4></div>
+							<div class="col-lg-12" id="loss" style="background-color: green; color: white"><h4 class="h4">Loss:</h4></div>
+						</div>
+						<div class="col-lg-6"></div>
+				</div>
+					
+			
+
+				<div class="row">
+						<div class="col-lg-6" style="background-color: purple;"> 
+							<div class="col-lg-3" style="border-style: solid;  width: 25%; padding: 0px;">
+							<button id="btn1" class="btn btn-primary btn-lg" onclick=btnjob('1')>
+							<img src="assets/images/cry1.jpg" class="img-circle">
+							</button>
+							</div>
+
+							<div class="col-lg-3" style="border-style: solid;  width: 25%;padding: 0px";>
+							<button id="btn2" class="btn btn-primary btn-lg" onclick=btnjob('2') ><img src="assets/images/cry2.jpg" class="img-circle" ></button>
+							</div>
+
+							<div class="col-lg-3" style="border-style: solid;  width: 25%;padding: 0px;">
+							<button id="btn3"class="btn btn-primary btn-lg" onclick=btnjob('3')>
+							<img src="assets/images/cry3.jpg" class="img-circle">
+							</button>
+							</div>
+
+							<div class="col-lg-3" style="border-style: solid;  width: 25%;padding: 0px;">
+							<button id="btn4"class="btn btn-primary btn-lg" onclick=btnjob('4')>
+							<img src="assets/images/cry4.jpg" class="img-circle">
+							</button>
+							</div>
+						
+						</div>
+						<div class="col-lg-6"></div>
+				</div>
+
+	</div>
+
+</div>
+
+<script type="text/javascript">
+	crimage='assets/images/cry3.jpg'
+
+var cr1num=0;
+var cr2num=0;
+var cr3num=0;
+var cr4num=0;
+var tnum=0;
+var myscore=0;
+var win=0;
+var loss=0;
+rndchk();
+//console.log(cr1num);
+function btnjob(btnId) {
+	// body...
+	if (btnId==1){
+		var xx1= parseInt(document.getElementById("btn1").value);
+		btnclick(xx1);
+	}
+	else
+	if (btnId==2){
+		var xx2= parseInt(document.getElementById("btn2").value);
+		btnclick(xx2);
+	}
+	else
+	if (btnId==3){
+		var xx3= parseInt(document.getElementById("btn3").value);
+		btnclick(xx3);
+	}
+	else
+	if (btnId==4){
+		var xx4= parseInt(document.getElementById("btn4").value);
+		btnclick(xx4);
+	}
+
+
+}
+
+function btnclick(scr1){
+
+	if (myscore < tnum) {
+	myscore=myscore+scr1;
+		$('#yscore').html('<h3>Score:'+myscore+'</h3>');
+	}
+	
+	if (myscore==tnum) 
+	{			rndchk();
+				win=win+1;	
+				$('#wins').html('<h4>Wins:'+win+'</h4>');
+				$('#help').append("<img src="+crimage+">");
+				
+	}
+
+	if (myscore > tnum) {
+					rndchk();
+					loss=loss+1;
+					$('#loss').html('<h4>Loss:'+loss+'</h4>');
+					var dif = win - loss;
+					$('#help').empty();
+					if (dif>0){
+							for (var i = 0; i < dif; i++) {
+									$('#help').append("<img src="+crimage+">");
+								}
+						
+
+
+						}
+				
+					
+		}
+
+}
+
+function rndchk(argument) {
+	// body...
+		tnum = Math.floor(Math.random()*120)+19; //Target Number
+		cr1num=Math.floor(Math.random()*12)+1; //Hidden numbers by crystals
+		cr2num=Math.floor(Math.random()*12)+1;
+		cr3num=Math.floor(Math.random()*12)+1;
+		cr4num=Math.floor(Math.random()*12)+1;
+
+
+		$('#btn1').attr('value', cr1num);      //changing the value attribute of buttons
+		$('#btn2').attr('value', cr2num);
+		$('#btn3').attr('value', cr3num);
+		$('#btn4').attr('value', cr4num);
+		myscore=0;
+	$('#yscore').html('<h3>Score:'+myscore+'</h3>');
+	$('#tscore').html('<h2>Target:'+tnum+'</h2>');
+
+}
+
+
+</script>
+
+</body>
+</html>
